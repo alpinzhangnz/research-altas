@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Research Atlas</title>
+    <link rel="stylesheet" href="styles.css?v=6" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <span class="logo">🔎</span>
+        <h1>Research Atlas</h1>
+      </div>
+      
+      <div class="header-sponsor">
+        <span class="sponsor-label">Sponsored by</span>
+        <a href="#" class="sponsor-name">Bytemind Ltd</a>
+      </div>
+
+      <div class="user-menu" id="userMenu">
+        <button id="artBtn" class="nav-btn">🎨 Art Studio</button>
+        <button id="dictBtn" class="nav-btn">📖 Dictionary</button>
+        <button id="plansBtn" class="nav-btn">Plans</button>
+        <div class="plan-badge" id="planBadge">Visitor</div>
+        <button id="loginBtn">Log In</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="search-panel">
+        <input id="searchInput" type="text" placeholder="Search anything… e.g., Egypt, AI, photosynthesis" />
+        <div class="quick-topics" id="quickTopics"></div>
+      </section>
+
+      <section class="content">
+        <!-- Sponsored Ad Container (Visitor Only) -->
+        <div id="sponsoredAd" class="sponsored-ad glass hidden">
+          <div class="ad-label">Sponsored</div>
+          
+          <!-- Ad 1: Wikipedia -->
+          <div class="ad-content">
+            <div class="ad-icon">W</div>
+            <div class="ad-text">
+              <h3>Wikipedia</h3>
+              <p>The Free Encyclopedia. Support open knowledge.</p>
+            </div>
+            <a href="https://www.wikipedia.org" target="_blank" class="ad-cta">Donate</a>
+          </div>
+
+          <!-- Divider -->
+          <div style="height: 1px; background: var(--panel-border); margin: 0 1rem;"></div>
+
+          <!-- Ad 2: Research Pathway -->
+          <div class="ad-content">
+            <div class="ad-icon" style="background: #0f172a; color: white;">RP</div>
+            <div class="ad-text">
+              <h3>Research Pathway</h3>
+              <p>Expert academic guidance and research resources.</p>
+            </div>
+            <a href="https://researchpathway.co.nz" target="_blank" class="ad-cta">Visit</a>
+          </div>
+        </div>
+
+        <div class="results glass" id="results">
+          <div class="results-header">
+            <button class="tab active" data-tab="local">Local</button>
+            <button class="tab" data-tab="web">Web</button>
+          </div>
+          <div id="localResults"></div>
+          <div id="webResults" class="hidden"></div>
+        </div>
+        <article class="article-detail glass" id="articleDetail">
+          <div class="empty-state">
+            <div style="font-size: 48px; margin-bottom: 16px;">📚</div>
+            Select an article to read its summary and sources.
+          </div>
+        </article>
+      </section>
+
+      <section class="chat glass" id="chatSection">
+        <div class="chat-header">
+          <div class="chat-title">Research Atlas AI</div>
+          <div class="chat-controls">
+            <label class="toggle">
+              <input type="checkbox" id="chatUseWeb" checked>
+              <span>Use Web</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="chatUseLocal" checked>
+              <span>Use Local</span>
+            </label>
+            <label class="toggle">
+              <span>Persona</span>
+              <select id="chatPersona">
+                <option value="default" selected>Default</option>
+                <option value="coder">Coder</option>
+                <option value="teacher">Teacher</option>
+                <option value="explainer">Explainer</option>
+              </select>
+            </label>
+            <label class="toggle">
+              <span>Creativity</span>
+              <input type="range" id="chatTemp" min="0" max="1" step="0.1" value="0.3" />
+            </label>
+          </div>
+        </div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-input">
+          <textarea id="chatInput" rows="2" placeholder="Ask anything…"></textarea>
+          <div class="chat-actions">
+            <button id="chatSend">Send</button>
+            <button id="chatStop">Stop</button>
+            <button id="chatRegen">Regenerate</button>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+
+    <footer class="site-footer">
+      <span>© Research Atlas. Educational summaries; verify with sources for accuracy.</span>
+      <div class="creator-signature">Created by <strong>Alpin Zhang</strong></div>
+      <br>
+      <a href="#" id="adminLink" style="font-size: 0.8rem; color: #cbd5e1; text-decoration: none; margin-top: 5px; display: inline-block;">Admin Portal</a>
+    </footer>
+
+    <!-- Pricing Overlay -->
+    <div class="pricing-overlay" id="pricingOverlay">
+      <div class="pricing-content">
+        <h2>Select Your Research Mode</h2>
+        <p class="pricing-sub">Unlock the full power of AI-driven research.</p>
+        <div class="creator-signature" style="margin-top: 0.5rem; margin-bottom: 2rem; opacity: 0.9; color: white;">Created by <strong>Alpin Zhang</strong></div>
+        
+        <a href="https://researchpathway.co.nz" target="_blank" class="promo-link">
+          <span class="promo-icon">🎓</span>
+          <span class="promo-text">Please try out <strong>Research Pathway</strong></span>
+        </a>
+
+        <div class="promo-benefits">
+          <span>✨ Expert Guidance</span>
+          <span>📚 Premium Resources</span>
+          <span>🚀 Accelerate Discovery</span>
+          <span>💡 Innovative Tools</span>
+        </div>
+
+        <div class="plans-grid">
+          <div class="plan-card" data-plan="visitor">
+            <div class="plan-name">Visitor</div>
+            <ul class="plan-features">
+              <li>⚡️ Instant AI Access</li>
+              <li>📚 Public Research Library</li>
+              <li>📢 Includes Sponsored Ads</li>
+            </ul>
+            <button class="plan-btn">Select Visitor</button>
+          </div>
+
+          <div class="plan-card" data-plan="starter">
+            <div class="plan-name">Starter</div>
+            <ul class="plan-features">
+              <li>🧠 Deep Neural Search</li>
+              <li>📂 Unlimited Local Analysis</li>
+              <li>📝 Smart Summarization</li>
+            </ul>
+            <button class="plan-btn">Select Starter</button>
+          </div>
+
+          <div class="plan-card featured" data-plan="premium">
+            <div class="plan-tag">POPULAR</div>
+            <div class="plan-name">Premium</div>
+            <ul class="plan-features">
+              <li>🌐 Real-Time Web Intelligence</li>
+              <li>🎭 Multi-Persona Reasoning</li>
+              <li>⚡️ Turbo-Charged Speed</li>
+            </ul>
+            <button class="plan-btn">Select Premium</button>
+          </div>
+
+          <div class="plan-card gold" data-plan="gold">
+            <div class="plan-name">Gold</div>
+            <ul class="plan-features">
+              <li>🚀 Quantum-Speed Processing</li>
+              <li>👑 God Mode Access</li>
+              <li>🛡️ Enterprise-Grade Security</li>
+              <li>🔮 Early Access to Future Models</li>
+            </ul>
+            <button class="plan-btn">Select Gold</button>
+          </div>
+
+          <div class="plan-card ultra" data-plan="ultra">
+            <div class="plan-tag">ULTIMATE</div>
+            <div class="plan-name">Ultra Mode</div>
+            <ul class="plan-features">
+              <li>🌌 Omniscient AI Core</li>
+              <li>⏳ Time-Travel Research</li>
+              <li>🧠 Direct Neural Interface</li>
+              <li>🪐 Reality Simulation Engine</li>
+            </ul>
+            <button class="plan-btn">Enter Ultra Dimension</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal hidden" id="loginModal">
+      <div class="login-box">
+        <div class="login-header">
+          <h2>Welcome Back</h2>
+          <p>Sign in to your Research Atlas account</p>
+        </div>
+        
+        <form id="loginForm">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="name@example.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" required>
+          </div>
+          
+          <div class="form-actions">
+            <a href="#" class="forgot-pass">Forgot password?</a>
+          </div>
+          
+          <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+        
+        <div class="divider">
+          <span>OR</span>
+        </div>
+        
+        <button class="google-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+            <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.836.86-3.048.86-2.344 0-4.328-1.584-5.032-3.726H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+            <path d="M3.968 10.695a5.41 5.41 0 0 1-.282-1.695c0-.586.102-1.154.282-1.695V4.973H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.027l3.011-2.332z" fill="#FBBC05"/>
+            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.973L3.968 7.3C4.672 5.157 6.656 3.58 9 3.58z" fill="#EA4335"/>
+          </svg>
+          Sign in with Google
+        </button>
+        
+        <div class="login-footer">
+          Don't have an account? <a href="#" id="signupLink">Sign up</a>
+        </div>
+
+        <button class="close-modal" id="closeLogin">✕</button>
+      </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="login-modal hidden" id="forgotPasswordModal">
+      <div class="login-box">
+        <div class="login-header">
+          <h2>Reset Password</h2>
+          <p>Enter your email to receive your password.</p>
+        </div>
+        
+        <form id="forgotPasswordForm">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="name@example.com" required>
+          </div>
+          
+          <button type="submit" class="submit-btn" id="sendPasswordBtn">Send Password</button>
+        </form>
+
+        <button class="close-modal" id="closeForgotPassword">✕</button>
+      </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="login-modal hidden" id="paymentModal">
+      <div class="login-box payment-box">
+        <div class="login-header">
+          <h2>Secure Payment</h2>
+          <p id="paymentPlanName">Upgrading to Premium</p>
+        </div>
+        
+        <form id="paymentForm">
+          <div class="form-group">
+            <label>Cardholder Name</label>
+            <input type="text" placeholder="John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry</label>
+              <input type="text" placeholder="MM/YY" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label>CVC</label>
+              <input type="text" placeholder="123" maxlength="3" required>
+            </div>
+          </div>
+          
+          <button type="submit" class="submit-btn" id="payNowBtn">Pay Now</button>
+        </form>
+
+        <button class="close-modal" id="closePayment">✕</button>
+      </div>
+    </div>
+
+    <!-- AI Art Studio Modal -->
+    <div class="login-modal hidden" id="artModal">
+      <div class="login-box art-box">
+        <div class="login-header">
+          <h2>🎨 Neural Art Studio</h2>
+          <p>Describe what you want to see. The AI will learn from the web and draw it.</p>
+        </div>
+        <div class="art-display" id="artDisplay">
+          <div class="art-placeholder">
+            <span>Your creation will appear here</span>
+          </div>
+        </div>
+        <div class="art-controls">
+          <textarea id="artPrompt" placeholder="A futuristic city with flying cars at sunset..."></textarea>
+          <button id="generateArtBtn" class="primary-btn">Generate Art</button>
+        </div>
+        <div class="art-status hidden" id="artStatus">
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div class="status-text">Scanning web for references...</div>
+        </div>
+        <button class="close-modal" id="closeArt">✕</button>
+      </div>
+    </div>
+
+    <!-- Dictionary Modal -->
+    <div class="login-modal hidden" id="dictModal">
+      <div class="login-box dict-box">
+        <div class="login-header">
+          <h2>📖 Web Dictionary</h2>
+          <p>Instant definitions from the global knowledge base.</p>
+        </div>
+        <div class="dict-controls">
+          <input type="text" id="dictInput" placeholder="Enter a word to define..." />
+          <button id="dictSearchBtn" class="primary-btn">Define</button>
+        </div>
+        <div class="dict-results" id="dictResults">
+          <div class="dict-placeholder">
+            <span>Definitions will appear here</span>
+          </div>
+        </div>
+        <button class="close-modal" id="closeDict">✕</button>
+      </div>
+    </div>
+
+    <!-- Benefit Details Modal -->
+    <div class="login-modal hidden" id="benefitModal">
+      <div class="login-box benefit-box">
+        <div class="login-header">
+          <h2 id="benefitTitle">Benefit Title</h2>
+          <p id="benefitDescription">Description goes here.</p>
+        </div>
+        <button class="close-modal" id="closeBenefit">✕</button>
+      </div>
+    </div>
+
+    <script type="module" src="data/articles.js"></script>
+    <script type="module" src="data/chitchat.js"></script>
+    <script type="module" src="data/subscription.js"></script>
+    <script type="module" src="app.js?v=5"></script>
+  </body>
+  </html>
